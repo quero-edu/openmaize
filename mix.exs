@@ -23,7 +23,7 @@ defmodule Openmaize.Mixfile do
   end
 
   defp deps do
-    [{:cowboy, "~> 1.1"},
+    [{:cowboy, "~>  2.6"},
      {:plug, "~> 1.3"},
      {:comeonin, "~> 3.0"},
      {:ecto, "~> 2.1"},
