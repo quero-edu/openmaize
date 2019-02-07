@@ -31,8 +31,8 @@ defmodule Openmaize.Database do
   Add the following three entries to your user schema:
 
       field :confirmation_token, :string
-      field :confirmation_sent_at, Ecto.DateTime
-      field :confirmed_at, Ecto.DateTime
+      field :confirmation_sent_at, :utc_datetime_usec
+      field :confirmed_at, :utc_datetime_usec
 
   ## Examples
 
@@ -44,7 +44,7 @@ defmodule Openmaize.Database do
   """
   def add_confirm_token(user, key) do
     change(user, %{confirmation_token: key,
-      confirmation_sent_at: Ecto.DateTime.utc})
+      confirmation_sent_at: DateTime.utc_now})
   end
 
   @doc """
@@ -53,20 +53,20 @@ defmodule Openmaize.Database do
   Add the following two entries to your user schema:
 
       field :reset_token, :string
-      field :reset_sent_at, Ecto.DateTime
+      field :reset_sent_at, :utc_datetime_usec
 
   As with 'add_confirm_token', the function 'Openmaize.ConfirmEmail.gen_token_link'
   can be used to generate the token and link.
   """
   def add_reset_token(user, key) do
-    change(user, %{reset_token: key, reset_sent_at: Ecto.DateTime.utc})
+    change(user, %{reset_token: key, reset_sent_at: DateTime.utc_now})
   end
 
   @doc """
   Change the 'confirmed_at' value in the database to the current time.
   """
   def user_confirmed(user, repo) do
-    change(user, %{confirmed_at: Ecto.DateTime.utc})
+    change(user, %{confirmed_at: DateTime.utc_now})
     |> repo.update
   end
 

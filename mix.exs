@@ -26,9 +26,9 @@ defmodule Openmaize.Mixfile do
     [{:cowboy, "~>  2.6"},
      {:plug, "~> 1.3"},
      {:comeonin, "~> 3.0"},
-     {:ecto, "~> 2.1"},
+     {:ecto_sql, "~> 3.0"},
      {:timex, "~> 3.0"},
-     {:postgrex, "~> 0.13", optional: true},
+     {:postgrex, "~> 0.14", optional: true},
      {:not_qwerty123, "~> 2.0", optional: true},
      {:earmark, "~> 1.1", only: :dev},
      {:ex_doc,  "~> 0.14", only: :dev}]

@@ -6,7 +6,7 @@ defmodule Openmaize.DatabaseTest do
 
   test "easy password results in an error being added to the changeset" do
     user = %{email: "bill@mail.com", username: "bill", role: "user", password: "qwerty123",
-             phone: "081655555", confirmed_at: Ecto.DateTime.utc}
+             phone: "081655555", confirmed_at: DateTime.utc_now}
     {:error, changeset} = %TestUser{} |> TestUser.auth_changeset(user) |> TestRepo.insert
     errors = changeset.errors[:password] |> elem(0)
     assert errors =~ "password you have chosen is weak"
@@ -22,15 +22,15 @@ defmodule Openmaize.DatabaseTest do
 
   test "add_reset_token" do
     user = %TestUser{email: "reg@mail.com", username: "reg", role: "user", password: "h4rd2gU3$$",
-      phone: "081755555", confirmed_at: Ecto.DateTime.utc}
+      phone: "081755555", confirmed_at: DateTime.utc_now}
     changeset = Database.add_reset_token(user, "lg8UXGNMpb5LUGEDm62PrwW8c20qZmIw")
     assert changeset.changes.reset_token
     assert changeset.changes.reset_sent_at
   end
 
   test "check time" do
-    assert Database.check_time(Ecto.DateTime.utc, 60)
-    refute Database.check_time(Ecto.DateTime.utc, -60)
+    assert Database.check_time(DateTime.utc_now, 60)
+    refute Database.check_time(DateTime.utc_now, -60)
     refute Database.check_time(nil, 60)
   end
 

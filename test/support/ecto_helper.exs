@@ -11,7 +11,9 @@ Application.put_env(:openmaize, TestRepo,
   pool: Ecto.Adapters.SQL.Sandbox)
 
 defmodule Openmaize.TestRepo do
-  use Ecto.Repo, otp_app: :openmaize
+  use Ecto.Repo,
+    otp_app: :openmaize,
+    adapter: Ecto.Adapters.Postgres
 end
 
 defmodule UsersMigration do
@@ -24,11 +26,11 @@ defmodule UsersMigration do
       add :phone, :string
       add :password_hash, :string
       add :role, :string
-      add :confirmed_at, :utc_datetime
+      add :confirmed_at, :utc_datetime_usec
       add :confirmation_token, :string
-      add :confirmation_sent_at, :utc_datetime
+      add :confirmation_sent_at, :utc_datetime_usec
       add :reset_token, :string
-      add :reset_sent_at, :utc_datetime
+      add :reset_sent_at, :utc_datetime_usec
       add :otp_required, :boolean
       add :otp_secret, :string
       add :otp_last, :integer
@@ -50,11 +52,11 @@ defmodule Openmaize.TestUser do
     field :role, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    field :confirmed_at, Ecto.DateTime
+    field :confirmed_at, :utc_datetime_usec
     field :confirmation_token, :string
-    field :confirmation_sent_at, Ecto.DateTime
+    field :confirmation_sent_at, :utc_datetime_usec
     field :reset_token, :string
-    field :reset_sent_at, Ecto.DateTime
+    field :reset_sent_at, :utc_datetime_usec
     field :otp_required, :boolean
     field :otp_secret, :string
     field :otp_last, :integer

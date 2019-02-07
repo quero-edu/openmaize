@@ -5,3 +5,4 @@ tmp
 erl_crash.dump
 mix.lock
 tags
+.elixir_ls

@@ -18,7 +18,7 @@ defmodule <%= base %>.TestHelpers do<%= if api do %>
   def add_user_confirmed(username) do
     add_user(username)
     Repo.get_by(User, %{username: username})
-    |> change(%{confirmed_at: Ecto.DateTime.utc})
+    |> change(%{confirmed_at: DateTime.utc_now})
     |> Repo.update!
   end
 
